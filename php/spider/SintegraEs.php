@@ -5,13 +5,11 @@ include_once('Util/Util.php');
 /**
  * @author Baltasar Santos <baltasarc.s@gmail.com>
  */
-class SintegraEs {
+class SintegraEs extends Spider{
 
 	function searchByCnpj( $cnpj ) {
 
 		if (!Util::validaCnpj($cnpj)) throw new Exception("CNPJ inválido!");
-
-		$spider = new Spider();
 
 		$params['url'] = 'http://www.sintegra.es.gov.br/resultado.php';
 		$params['http_verb'] = 'POST';
@@ -20,7 +18,7 @@ class SintegraEs {
 		$params['params']['num_ie'] = '';
 		$params['params']['num_cnpj'] = $cnpj;									
 
-		$response = $spider->request( $params['url'], $params['http_verb'], $params['referer'], $params['params'] );
+		$response = $this->request( $params['url'], $params['http_verb'], $params['referer'], $params['params'] );
 		
 		try {
 
